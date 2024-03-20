@@ -16,7 +16,7 @@ public class Main {
     static int N; // 식당 수
     static int[] customers; // 각 식당 고객 수 
     static int[] maxCustomer = new int[2]; // 팀장,팀원
-    static int result;
+    static long result;
     public static void main(String[] args) throws Exception {
         // 여기에 코드를 작성해주세요.
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -40,14 +40,12 @@ public class Main {
             int maintain = customers[i] - leader;
             if (maintain > 0){
                 result += (1+ maintain / member);
-            
                 if (maintain%member > 0){ // 나머지가 있으면
                     result += 1;
                 }
             } else {
                 result += 1;
             }
-            
         }
 
         System.out.println(result);
