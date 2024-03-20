@@ -38,11 +38,16 @@ public class Main {
 
         for (int i=0; i<N; i++){
             int maintain = customers[i] - leader;
-            result += (1+ maintain / member);
+            if (maintain > 0){
+                result += (1+ maintain / member);
             
-            if (maintain%member > 0){ // 나머지가 있으면
+                if (maintain%member > 0){ // 나머지가 있으면
+                    result += 1;
+                }
+            } else {
                 result += 1;
             }
+            
         }
 
         System.out.println(result);
