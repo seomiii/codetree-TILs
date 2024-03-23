@@ -98,7 +98,7 @@ public class Main {
                 graph[nr][nc] = 0; // 잡으면 사라짐.
             }
     
-            for (int j=0; j<3; j++){
+            for (int j=0; j<2; j++){
             nr += suldr[sul.dir];
             nc += suldc[sul.dir];
             
