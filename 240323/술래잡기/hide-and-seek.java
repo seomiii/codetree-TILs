@@ -217,6 +217,8 @@ public class Main {
                         graph[dom.r][dom.c] -=1;
                         graph[nr][nc] +=1; // 이동
                         newdomangs.add(new Node(nr,nc,dom.dir));
+                }else {
+                    newdomangs.add(dom);
                 }
 
                 // System.out.println("new domang : "+nr+" "+nc+" "+dom.dir);
