@@ -46,7 +46,7 @@ public class Main {
         // 술래 : -1, 도망자 : 1 (수로 셈), 방향 
         graph = new int[N+1][N+1];
         trees = new int[N+1][N+1];
-        graph[N/2+1][N/2+1] = -1; // 술래
+        // graph[N/2+1][N/2+1] = -1; // 술래
         sul = new Node(N/2+1, N/2+1, 0); // 술래
 
         for (int i=0; i<M; i++){ // 도망자 // 상 하 좌 우 0 1 2 3 
@@ -72,6 +72,9 @@ public class Main {
             trees[r][c] = -2;
         }
 
+        
+            
+
         for (int i=1; i<=K; i++){ // k번 반복
             // 1. 도망자 도망치기
             Domang();
@@ -80,14 +83,20 @@ public class Main {
             Sul();
 
             // 3. 시야 내에 있는 도망자 잡기 - 방향을 기준으로 3칸
+            // System.out.println(sul.r+" "+sul.c);
             // for (int k=1; k<=N; k++){
             //     System.out.println(Arrays.toString(graph[k]));
             // }
+            // System.out.println();
 
             int nr = sul.r;
             int nc = sul.c;
             int ccatch = 0;
             // System.out.println("tree "+trees[sul.r][sul.c]);
+            if (graph[nr][nc] > 0 && trees[nr][nc] == 0){
+                ccatch+= graph[nr][nc];
+                graph[nr][nc] = 0; // 잡으면 사라짐.
+            }
     
             for (int j=0; j<3; j++){
             nr += suldr[sul.dir];
@@ -96,8 +105,9 @@ public class Main {
             if (nr<=0 || nr>N || nc<=0 || nc>N) break;
             // System.out.println(nr +" "+ nc +" "+graph[nr][nc] +" " + trees[nr][nc]);
             if (graph[nr][nc] > 0 && trees[nr][nc] == 0){
-                // System.out.println("cathc");
+                // System.out.println(nr+" "+ nc+" " +graph[nr][nc]+"cathc");
                 ccatch+= graph[nr][nc];
+                graph[nr][nc] = 0; // 잡으면 사라짐.
                 }
             }
                 
@@ -186,8 +196,8 @@ public class Main {
         int nr = sul.r + suldr[sul.dir];
         int nc = sul.c + suldc[sul.dir];
 
-        graph[nr][nc] = -1;
-        graph[sul.r][sul.c] = 0;
+        // graph[nr][nc] = -1;
+        // graph[sul.r][sul.c] = 0;
 
         sul.r = nr;
         sul.c = nc;
@@ -196,8 +206,9 @@ public class Main {
     public static void Domang(){
         while(!domangs.isEmpty()){
             Node dom = domangs.poll();
+            if(graph[dom.r][dom.c] == 0) continue;
             
-            // System.out.println("domang : "+dom.r+" "+dom.c+" "+dom.dir);
+            // System.out.println("domang : "+dom.r+" "+dom.c+" "+dom.dir+" "+graph[dom.r][dom.c]);
             // 술래와의 거리가 3 이하인가?
             int distance = Math.abs(dom.r-sul.r) + Math.abs(dom.c-sul.c);
             if (distance <= 3){
@@ -213,7 +224,7 @@ public class Main {
                 }
 
                 // 술래가 없다면
-                if (graph[nr][nc] != -1){ 
+                if (nr != sul.r && nc != sul.c){ 
                         graph[dom.r][dom.c] -=1;
                         graph[nr][nc] +=1; // 이동
                         newdomangs.add(new Node(nr,nc,dom.dir));
