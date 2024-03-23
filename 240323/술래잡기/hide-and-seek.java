@@ -87,23 +87,25 @@ public class Main {
             int nr = sul.r;
             int nc = sul.c;
             int ccatch = 0;
+            // System.out.println("tree "+trees[sul.r][sul.c]);
+    
             for (int j=0; j<3; j++){
-                nr += suldr[sul.dir];
-                nc += suldc[sul.dir];
-
-                
-                if (nr<=0 || nr>N || nc<=0 || nc>N) break;
-                // System.out.println(nr +" "+ nc +" "+graph[nr][nc] +" " + trees[nr][nc]);
-                if (graph[nr][nc] > 0 && trees[nr][nc] == 0){
-                    // System.out.println("cathc");
-                    ccatch+= graph[nr][nc];
+            nr += suldr[sul.dir];
+            nc += suldc[sul.dir];
+            
+            if (nr<=0 || nr>N || nc<=0 || nc>N) break;
+            // System.out.println(nr +" "+ nc +" "+graph[nr][nc] +" " + trees[nr][nc]);
+            if (graph[nr][nc] > 0 && trees[nr][nc] == 0){
+                // System.out.println("cathc");
+                ccatch+= graph[nr][nc];
                 }
             }
+                
             // System.out.println(result+" "+ccatch+" "+i);
             result += ccatch * i;
 
         }
-
+        
         System.out.println(result);
 
     } // end of main
@@ -120,8 +122,6 @@ public class Main {
 
     static int[] suldr = {-1,0,1,0}; // 상 우 하 좌
     static int[] suldc ={0,1,0,-1};
-    // 2 1 0 3 2 1
-    // (2 + 3)%4
 
     public static void Sul(){
         if (!flag){ // 정방향
@@ -221,6 +221,8 @@ public class Main {
 
                 // System.out.println("new domang : "+nr+" "+nc+" "+dom.dir);
 
+            }else {
+                newdomangs.add(dom);
             }
         }
 
