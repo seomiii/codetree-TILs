@@ -208,7 +208,7 @@ public class Main {
             Node dom = domangs.poll();
             if(graph[dom.r][dom.c] == 0) continue;
             
-            // System.out.println("domang : "+dom.r+" "+dom.c+" "+dom.dir+" "+graph[dom.r][dom.c]);
+            //System.out.println("domang : "+dom.r+" "+dom.c+" "+dom.dir+" "+graph[dom.r][dom.c]);
             // 술래와의 거리가 3 이하인가?
             int distance = Math.abs(dom.r-sul.r) + Math.abs(dom.c-sul.c);
             if (distance <= 3){
@@ -224,15 +224,17 @@ public class Main {
                 }
 
                 // 술래가 없다면
-                if (nr != sul.r && nc != sul.c){ 
+               // System.out.println("?? : "+nr+" "+sul.r+" "+nc+" "+sul.c+" "+dom.dir);
+                if (nr != sul.r || nc != sul.c){ 
                         graph[dom.r][dom.c] -=1;
                         graph[nr][nc] +=1; // 이동
                         newdomangs.add(new Node(nr,nc,dom.dir));
+                        // System.out.println("newnewe domang : "+nr+" "+nc+" "+dom.dir);
                 }else {
                     newdomangs.add(dom);
                 }
 
-                // System.out.println("new domang : "+nr+" "+nc+" "+dom.dir);
+               // System.out.println("new domang : "+nr+" "+nc+" "+dom.dir);
 
             }else {
                 newdomangs.add(dom);
